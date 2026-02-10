@@ -1,16 +1,20 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
+  { label: "Gallery", href: "/gallery", isRoute: true },
   { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -18,9 +22,15 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleClick = (href: string) => {
+  const handleClick = (item: typeof navItems[0]) => {
     setMobileOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    if (item.isRoute) {
+      navigate(item.href);
+    } else if (location.pathname !== "/") {
+      navigate("/" + item.href);
+    } else {
+      document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -36,7 +46,7 @@ const Navbar = () => {
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <button
-          onClick={() => handleClick("#home")}
+          onClick={() => handleClick({ label: "Home", href: "#home" })}
           className="font-display text-xl font-bold tracking-tight text-foreground hover:text-primary transition-colors"
         >
           Flutschi
@@ -47,7 +57,7 @@ const Navbar = () => {
           {navItems.map((item) => (
             <button
               key={item.href}
-              onClick={() => handleClick(item.href)}
+               onClick={() => handleClick(item)}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors font-medium"
             >
               {item.label}
@@ -77,7 +87,7 @@ const Navbar = () => {
               {navItems.map((item) => (
                 <button
                   key={item.href}
-                  onClick={() => handleClick(item.href)}
+                  onClick={() => handleClick(item)}
                   className="text-left text-muted-foreground hover:text-foreground transition-colors font-medium"
                 >
                   {item.label}
