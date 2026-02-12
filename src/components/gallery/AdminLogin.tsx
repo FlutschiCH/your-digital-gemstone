@@ -11,6 +11,8 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
+const ADMIN_PASSWORD = "Godzilla_12";
+
 interface AdminLoginProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -19,36 +21,19 @@ interface AdminLoginProps {
 
 const AdminLogin = ({ open, onOpenChange, onLogin }: AdminLoginProps) => {
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!password.trim()) return;
 
-    setLoading(true);
-    setError("");
-
-    // Simple token = the password itself; the PHP backend validates it
-    // In production, you'd do a proper auth endpoint
-    try {
-      const res = await fetch("/gallery/api.php?action=list_albums", {
-        headers: { "X-Admin-Token": password },
-      });
-      if (res.ok) {
-        onLogin(password);
-        setPassword("");
-        onOpenChange(false);
-      } else {
-        setError("Invalid password");
-      }
-    } catch {
-      // If API is unreachable, still store token locally for later
+    if (password === ADMIN_PASSWORD) {
       onLogin(password);
       setPassword("");
+      setError("");
       onOpenChange(false);
-    } finally {
-      setLoading(false);
+    } else {
+      setError("Invalid password");
     }
   };
 
@@ -84,10 +69,7 @@ const AdminLogin = ({ open, onOpenChange, onLogin }: AdminLoginProps) => {
               </motion.p>
             )}
           </AnimatePresence>
-          <Button type="submit" disabled={loading}>
-            {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-            Login
-          </Button>
+          <Button type="submit">Login</Button>
         </form>
       </DialogContent>
     </Dialog>
