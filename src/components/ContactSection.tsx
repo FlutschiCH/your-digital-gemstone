@@ -16,7 +16,7 @@ const ContactSection = () => {
     const body = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
     );
-    window.open(`mailto:hello@flutschi.ch?subject=${subject}&body=${body}`);
+    window.open(`mailto:info@flutschi.ch?subject=${subject}&body=${body}`);
   };
 
   return (
@@ -59,7 +59,7 @@ const ContactSection = () => {
                 <div className="p-2.5 rounded-lg bg-primary/10 text-primary">
                   <Mail size={18} />
                 </div>
-                <span>hello@flutschi.ch</span>
+                <span>info@flutschi.ch</span>
               </div>
               <div className="flex items-center gap-4 text-muted-foreground">
                 <div className="p-2.5 rounded-lg bg-primary/10 text-primary">
