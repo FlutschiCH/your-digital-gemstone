@@ -42,7 +42,7 @@ const HeroSection = () => {
           className="text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight mb-6"
         >
           {/* Title updated to Flutschi */}
-          Hey, I'm <span className="text-gradient">Flutschi 213</span>
+          Hey, I'm <span className="text-gradient">Flutschi</span>
         </motion.h1>
 
         <motion.p
