@@ -29,11 +29,14 @@ jobs:
             echo "out=./" >> $GITHUB_OUTPUT
           fi
 
-      - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ github.event.client_payload.ftp_host }}
-          username: ${{ github.event.client_payload.ftp_user }}
-          password: ${{ github.event.client_payload.ftp_password }}
-          server-dir: ${{ github.event.client_payload.remote_dir }}
-          local-dir: ${{ steps.build.outputs.out }}
+        - name: FTP Deploy
+            uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+            with:
+            server: ${{ github.event.client_payload.ftp_host }}
+            username: ${{ github.event.client_payload.ftp_user }}
+            password: ${{ github.event.client_payload.ftp_password }}
+            server-dir: ${{ github.event.client_payload.remote_dir }}
+            local-dir: ${{ steps.build.outputs.out }}
+            protocol: ftp
+            port: 21
+            state-name: .ftp-deploy-sync-state.json # Explicitly naming it sometimes helps
