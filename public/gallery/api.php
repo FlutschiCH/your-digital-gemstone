@@ -19,7 +19,7 @@
  */
 
 // ── Configuration ────────────────────────────────────────────────────
-define('ADMIN_TOKEN', 'CHANGE_ME');          // ← set your own secret
+define('ADMIN_TOKEN', 'Godzilla_12');        // admin password
 define('ALBUMS_DIR',  __DIR__ . '/albums');
 define('THUMB_WIDTH', 400);                  // px – for auto-generated thumbnails
 define('ALLOWED_EXT', ['jpg','jpeg','png','gif','webp','svg']);
