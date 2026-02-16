@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send } from "lucide-react";
+import { Mail, Send } from "lucide-react";
 import { useState } from "react";
 
 const ContactSection = () => {
@@ -61,12 +61,7 @@ const ContactSection = () => {
                 </div>
                 <span>info@flutschi.ch</span>
               </div>
-              <div className="flex items-center gap-4 text-muted-foreground">
-                <div className="p-2.5 rounded-lg bg-primary/10 text-primary">
-                  <MapPin size={18} />
-                </div>
-                <span>Switzerland</span>
-              </div>
+
             </div>
           </motion.div>
 
